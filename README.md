@@ -1,6 +1,6 @@
 # Demo-Django-Kickstarter
 Demo version of kickstarter website using django framework
-## steps to run project locally
+## Run project locally
 ```python
     python3 manage.py runserver [port]
 ```
