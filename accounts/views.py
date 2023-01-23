@@ -15,7 +15,9 @@ from .form import CreateUserForm
 #login_required(login_url='login')
 
 def app(request):
-    return render(request, 'user/index.html',{})
+    funds = Fund.objects.all()
+    return render(request, 'user/index.html',{'funds':funds})
+
 
 def loginPage(request):
     if request.method == 'POST':
