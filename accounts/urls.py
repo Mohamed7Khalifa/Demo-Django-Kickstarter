@@ -1,4 +1,7 @@
-from django.urls import path 
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 from . import views
 
@@ -14,4 +17,4 @@ urlpatterns = [
     path('fund-update/<int:id>', views.fundUpdate, name='fund-update'),
     path('fund-delete/<int:id>', views.fundDelete, name='fund-delete'),
 
-   ]
+   ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

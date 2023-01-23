@@ -163,9 +163,10 @@
         <div class="col-md-12 block-11" >
           <div class="nonloop-block-11 owl-carousel">
             {% for fund in funds %}
-            {{ fund.image }}
             <div class="card fundraise-item">
+              {% if fund.image %}
               <a href="#"><img class="card-img-top" src="{{fund.image.url}}" alt="Image placeholder"></a>
+              {% endif %}
               <div class="card-body">
                 <h3 class="card-title"><a href="{%url 'start:fund-list' %}"> {{ fund.title }} </a></h3>
                 <p class="card-text">{{ fund.description }}</p>
