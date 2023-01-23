@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from .models import *
+from .form import *
 
 
 from .form import CreateUserForm
@@ -76,5 +78,44 @@ def register(request):
     return render(request,'user/register.html',{"form":SignedUser})
 """
 
+def fundList(request):  
+    funds = Fund.objects.all()  
+    return render(request,"user/fund_list.html",{'funds':funds})
+
+def fundCreate(request):  
+    if request.method == "POST":  
+        form = FundForm(request.POST)  
+        if form.is_valid():  
+            try:  
+                form.save() 
+                model = form.instance
+                return redirect('/fund-list')  
+            except:  
+                pass  
+    else:  
+        form = FundForm()  
+    return render(request,'user/fund_create.html',{'form':form}) 
+
+def fundUpdate(request, id):  
+    fund = Fund.objects.get(id=id)
+    form = FundForm(initial={'title': fund.title, 'description': fund.description, 'author': fund.author, 'year': fund.year})
+    if request.method == "POST":  
+        form = FundForm(request.POST, instance=fund)  
+        if form.is_valid():  
+            try:  
+                form.save() 
+                model = form.instance
+                return redirect('/fund-list')  
+            except Exception as e: 
+                pass    
+    return render(request,'user/fund_update.html',{'form':form})
+
+def fundDelete(request, id):
+    fund = Fund.objects.get(id=id)
+    try:
+        fund.delete()
+    except:
+        pass
+    return redirect('/fund-list')
 
  
