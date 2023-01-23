@@ -81,14 +81,17 @@ def register(request):
 """
 
 def fundList(request):  
-    funds = Fund.objects.all()  
+    funds = Fund.objects.filter(user=request.user.id).values()  
     return render(request,"user/fund_list.html",{'funds':funds})
 
 def fundCreate(request):  
     if request.method == "POST":  
-        form = FundForm(request.POST)  
+        form = FundForm(request.POST,request.FILES)
         if form.is_valid():  
             try:  
+                instance = form.save(commit=False) 
+                instance.user = request.user
+                instance.save()
                 form.save() 
                 model = form.instance
                 return redirect('/fund-list')  

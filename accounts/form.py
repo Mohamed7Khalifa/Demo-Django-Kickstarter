@@ -12,3 +12,4 @@ class FundForm(ModelForm):
     class Meta:
         model = Fund
         fields = '__all__'
+        exclude = ['user','']

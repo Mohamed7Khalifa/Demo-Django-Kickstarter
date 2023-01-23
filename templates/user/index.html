@@ -150,11 +150,10 @@
         <div class="col-md-8 text-center">
           <h2>Latest Fundraisers</h2>
           <p class="lead">Some quick Donates.</p>
-          <p><a href="#" class="link-underline">View All Fundraisers</a></p>
+          <p><a href="{%url 'start:fund-list' %}" class="link-underline">View All Fundraisers</a></p>
         </div>
       </div>
     </div>
-
 
     <div class="container-fluid">
 
@@ -164,8 +163,9 @@
         <div class="col-md-12 block-11" >
           <div class="nonloop-block-11 owl-carousel">
             {% for fund in funds %}
+            {{ fund.image }}
             <div class="card fundraise-item">
-              <a href="#"><img class="card-img-top" src="{% static 'images/img_1.jpg'%}" alt="Image placeholder"></a>
+              <a href="#"><img class="card-img-top" src="{{fund.image.url}}" alt="Image placeholder"></a>
               <div class="card-body">
                 <h3 class="card-title"><a href="{%url 'start:fund-list' %}"> {{ fund.title }} </a></h3>
                 <p class="card-text">{{ fund.description }}</p>
@@ -191,7 +191,7 @@
       <div class="row mb-3 justify-content-center">
         <div class="col-md-8 text-center">
           <h2>Latest Donations</h2>
-          <p class="lead">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="lead">Some quick example of the max donation</p>
           <p class="mb-5"><a href="#" class="link-underline">View All Donations</a></p>
         </div>
       </div>
